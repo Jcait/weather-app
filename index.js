@@ -1,10 +1,11 @@
 console.log("Hello");
 
-async function getWeather() {
+async function getWeather(location) {
   const response = await fetch(
-    "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/london?unitGroup=metric&key=LACP5JA7YBA2Y3WSVB9HHCM7R&contentType=json"
+    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=LACP5JA7YBA2Y3WSVB9HHCM7R&contentType=json`,
+    { mode: "cors" }
   );
-  const weather = response.json();
+  const weather = await response.json();
   console.log(response);
-  console.log(weather);
+  console.log(weather.days[0].temp);
 }
