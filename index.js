@@ -1,13 +1,18 @@
-console.log("Hello");
+const select = document.querySelector("select");
+const form = document.querySelector("form");
+const btn = document.querySelector("button");
 
-async function getWeather(location) {
+async function getWeather() {
+  const selectCountry = document.querySelector("select>option:checked");
   const response = await fetch(
-    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=LACP5JA7YBA2Y3WSVB9HHCM7R&contentType=json`,
+    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${selectCountry.textContent}?unitGroup=metric&key=LACP5JA7YBA2Y3WSVB9HHCM7R&contentType=json`,
     { mode: "cors" }
   );
   const weather = await response.json();
   console.log(response);
-  console.log(weather.days[0].temp);
+  console.log(
+    `The temperature in ${selectCountry.textContent} is ${weather.days[0].temp}`
+  );
 }
 
 async function getCountries() {
@@ -24,6 +29,13 @@ async function getCountries() {
   console.log(data.results);
 
   data.results.forEach((country) => {
-    console.log(country.country);
+    const option = document.createElement("option");
+    option.textContent = country.country;
+    select.appendChild(option);
   });
 }
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  getWeather();
+});
