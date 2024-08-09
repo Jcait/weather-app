@@ -1,5 +1,7 @@
 const select = document.querySelector("select");
+const container = document.querySelector(".container");
 const form = document.querySelector("form");
+const p = document.querySelector("p");
 const btn = document.querySelector("button");
 
 async function getWeather() {
@@ -9,9 +11,7 @@ async function getWeather() {
     { mode: "cors" }
   );
   const weather = await response.json();
-  console.log(
-    `The temperature in ${selectCountry.textContent} is ${weather.days[0].conditions}`
-  );
+  addWeather(selectCountry, weather);
 }
 
 async function getCountries() {
@@ -32,6 +32,10 @@ async function getCountries() {
     option.textContent = country.country;
     select.appendChild(option);
   });
+}
+
+async function addWeather(selectCountry, weather) {
+  p.textContent = `The weather in ${selectCountry.textContent} is ${weather.days[0].conditions}`;
 }
 
 form.addEventListener("submit", (event) => {
