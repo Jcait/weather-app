@@ -9,9 +9,8 @@ async function getWeather() {
     { mode: "cors" }
   );
   const weather = await response.json();
-  console.log(response);
   console.log(
-    `The temperature in ${selectCountry.textContent} is ${weather.days[0].temp}`
+    `The temperature in ${selectCountry.textContent} is ${weather.days[0].conditions}`
   );
 }
 
@@ -39,3 +38,5 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
   getWeather();
 });
+
+getCountries();
