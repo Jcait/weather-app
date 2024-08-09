@@ -16,7 +16,7 @@ async function getWeather() {
 
 async function getCountries() {
   const response = await fetch(
-    "https://parseapi.back4app.com/classes/list_of_eu_union_countries?limit=10&order=country&keys=country,capital'",
+    "https://parseapi.back4app.com/classes/list_of_eu_union_countries?&order=country&keys=country,capital'",
     {
       headers: {
         "X-Parse-Application-Id": "7KffPh4njNmLBMB30kk9pvPGzBe7hwuK9SSQch6F", // This is the fake app's application id
@@ -37,6 +37,12 @@ async function getCountries() {
 async function addWeather(selectCountry, weather) {
   p.textContent = `The weather in ${selectCountry.textContent} is ${weather.days[0].conditions}`;
 }
+const weatherIcon = (weather) => {
+  switch (weather) {
+    default:
+      console.log(error);
+  }
+};
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
